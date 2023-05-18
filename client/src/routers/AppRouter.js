@@ -8,6 +8,7 @@ import ProjectPage from "../pages/ProjectPage";
 import ProjectsPage from "../pages/ProjectsPage";
 import RegisterPage from "../pages/RegisterPage";
 import Layout from "../components/layouts/Layout";
+import PrivateRoute from "./PrivateRoute";
 
 function AppRouter() {
   return (
@@ -17,11 +18,12 @@ function AppRouter() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/account" element={<AccountPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/project/:projectId" element={<ProjectPage />} />
-          <Route path="/admin/users" element={<UsersPage />} />
-
+          <Route element={<PrivateRoute />}>
+            <Route path="/account" element={<AccountPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/project/:projectId" element={<ProjectPage />} />
+            <Route path="/admin/users" element={<UsersPage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
